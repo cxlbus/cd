@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>WebSocket协议测试</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    学习websocket 协议
+</h1>
+<input type="text" id="text">
+<input type="button" onclick="sendMessage()" value="online">
+<div id="content">
+
+</div>
+<script src='./lib/js/reconnecting-websocket.min.js'></script>
+<script>
+
+    var socketStatus = false;
+    var ws = new ReconnectingWebSocket("ws://localhost:3000/ws-stuff/ws");
+    ws.onopen = function (e) {
+        socketStatus = true;
+        console.log('连接打开');
+    }
+    var content = document.getElementById('content')
+    ws.onmessage = function (event) {
+        console.log('服务端返回的消息', event);
+        content.innerHTML = ` <div>
+                          ${event.data}
+                        </div>`
+    };
+    ws.onclose = function (e) {
+        socketStatus = false;
+        console.log('连接关闭');
+    }
+
+    document.getElementById('text').oninput = function (event) {
+        ws.send(this.value);
+    }
+
+    function sendMessage() {
+        ws.send(document.getElementById('text').value);
+    }
+</script>
+
+</body>
+
+</html>

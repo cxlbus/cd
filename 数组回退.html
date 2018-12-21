@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let arr = [{
+        "id": "1",
+        "order_id": "第一个添加的",
+    }, {
+        "id": "2",
+        "order_id": "第二个添加的",
+    }, {
+        "id": "3",
+        "order_id": "第三个添加的",
+    }, {
+        "id": "4",
+        "order_id": "第四个添加的",
+    }]
+    let huitui=function (data) {
+        while (data.length>0){
+            let arr1 = arr.pop()
+            console.log(arr1)
+        }
+        return arr
+    }
+
+    console.log(huitui(arr))
+
+</script>
+</html>

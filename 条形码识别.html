@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<button id="rotate">旋转</button>
+<section id="container" class="container">
+    <div class="controls">
+        <fieldset class="input-group">
+            <input type="file" accept="image/*;capture=camera">
+            <button id="btnIdents">识别</button>
+        </fieldset>
+    </div>
+
+    <div style="margin-top: 100px;background: blue;height: 100px;width: 100%" >
+
+    </div>
+    <div id="interactive" class="viewport"><br clear="all"></div>
+</section>
+<script src="./lib/js/jquery.min.js" type="text/javascript"></script>
+<script src="./lib/js/quagga.min.js" type="text/javascript"></script>
+<script src="./lib/js/file_input.js" type="text/javascript"></script>
+<script type="text/javascript">
+    window.onload = function(){
+        var current = 0;
+        document.getElementById('rotate').onclick = function(){
+            current = (current+90)%360;
+            document.getElementById('interactive').style.transform = 'rotate('+current+'deg)';
+        }
+    };
+
+    $(function() {var App = {
+        init: function() {
+            App.attachListeners();
+        },
+        attachListeners: function() {
+            var self = this;
+            $("#btnIdents").on("click", function(e) {
+                var input = document.querySelector(".controls input[type=file]");
+                if (input.files && input.files.length) {
+                    App.decode(URL.createObjectURL(input.files[0]));
+                }
+            });
+        },
+        decode: function(src) {
+            var self = this,
+                config = $.extend({}, self.state, {src: src});
+            Quagga.decodeSingle(config, function(result) {
+                //识别结果
+                if(result.codeResult){
+                    console.log(result.codeResult.code);
+                }else{
+                    console.log(1)
+                }
+            });
+        },
+        state: {
+            inputStream: {
+                size: 1600,
+                area: {
+                    top: "1%",
+                    right: "1%",
+                    left: "1%",
+                    bottom: "1%"
+                }
+            },
+            numOfWorkers: 0,
+            locator: {
+                patchSize: "medium",
+                halfSample: true
+            },
+            decoder: {
+                readers: [{
+                    format: "code_128_reader",
+                    config: {}
+                }]
+            },
+            locate: true,
+            src: null
+        }
+    };
+
+        App.init();
+    });
+</script>
+</body>
+</html>

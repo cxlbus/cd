@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    console.log(1)
+    let data_arr = [{id: "abc", tag: "你好"}, {id: "cbd", tag: "中国"}, {id: "efc", tag: "123"}, {id: "das", tag: "123"}]
+    let data_arr1 = [{id: "abc", tag: "你好"}, {id: "cbd", tag: "中国"}, {id: "efc", tag: "123"}, {id: "mn", tag: "我的"}]//数据库里面的数据
+    //2个集合的差集 在arr不存在
+    Array.prototype.minus = function (arr) {
+        var result = new Array();
+        var obj = {};
+        for (var i = 0; i < arr.length; i++) {
+            obj[arr[i].id] = 1;
+        }
+        for (var j = 0; j < this.length; j++) {
+            if (!obj[this[j].id]) {
+                obj[this[j].id] = 1;
+                result.push(this[j]);
+            }
+        }
+        return result;
+    };
+
+    // console.log(data_arr1.minus(data_arr));
+
+    var list = [
+        {
+            "id": "1",
+            "code": "101",
+            "label_code": "1101",
+            "value": "kitchen"
+        },
+        {
+            "id": "1",
+            "code": "101",
+            "label_code": "1011",
+            "value": "kitchen"
+        },
+        {
+            "id": "1",
+            "code": "101",
+            "label_code": "1012",
+            "value": "kitchen"
+        },
+        {
+            "id": "1",
+            "code": "101",
+            "label_code": "1121",
+            "value": "dcd"
+        },
+        {
+            "id": "1",
+            "code": "101",
+            "label_code": "1081",
+            "value": "只是"
+        },
+        {
+            "id": "1",
+            "code": "101",
+            "label_code": "1021",
+            "value": "测试"
+        }
+    ]
+    var map = new Map()
+    for (let i = 0; i < list.length; i++) {
+        let a = list[i]
+        map.set(a.label_code,a.value)
+    }
+    console.log(map)
+var num=0
+    var num1=0
+    var formatJson = function (filterVal, roll) {
+        num++
+            return roll.map((j) => {
+                for(let od in j){
+                    if (filterVal.get(j[od])) {
+                        j[od] = filterVal.get(j[od])
+                    } else {
+                        j[od] = j[od]
+                    }
+                    if(j[od]&&typeof(j[od])=='object' &&j[od].length>0){
+                        formatJson(filterVal,j[od])
+                    }
+
+                }
+                return j
+            })
+
+    }
+
+    var formatJson1 = function (filterVal, j) {
+        num1++
+         for (let od in j){
+             if (filterVal.get(j[od])) {
+                 j[od] = filterVal.get(j[od])
+             } else {
+                 j[od] = j[od]
+             }
+             if(j[od]&&typeof(j[od])=='object'&&isNaN(j[od].length)){
+                 formatJson1(filterVal,j[od])
+             }
+             if(j[od]&&typeof(j[od])=='object'&&!isNaN(j[od].length)){
+                 formatJson(filterVal,j[od])
+             }
+        }
+        return j
+
+    }
+
+    const roll ={
+        "code": "200",
+        "msg": "请求成功!",
+        "msg": "1121",
+        "time": "2017-06-11T08:40:51.620Z",
+        "order": {
+            "orderInfo": {
+                "create_time": "2017-06-11T08:40:51.620Z",
+                "order_number": "123",
+                "status": "1101",
+                "update_time": "2017-06-11T08:40:51.620Z",
+                "update_account": "123",
+                "dealer_id": "123",
+                "delivery_time": "2017-06-11T08:40:51.620Z",
+                "is_install": "y",
+                "description": "我是备注",
+                "original_price": "3400",
+                "discount": "20",
+                "order_price": "3000",
+                "tax_gst_rate": "0.05",
+                "tax_tvq_rate": "0.09975",
+                "tax_gst": "20",
+                "tax_tvq": "30",
+                "total_price": "3500",
+                "shipTo": {
+                    "id": "111",
+                    "dealer_id": "261",
+                    "first_name": "1101",
+                    "last_name": "LI",
+                    "country": "Canada",
+                    "province": "Ontario",
+                    "city": "Montreal",
+                    "street": "Rue Drumond 1055",
+                    "bldg": "House Mongo",
+                    "postcode": "H1K2E3",
+                    "tel": "1371234567",
+                    "is_default": "1"
+                },
+                "billTo": {
+                    "id": "111",
+                    "dealer_id": "261",
+                    "first_name": "David",
+                    "last_name": "LI",
+                    "country": "Canada",
+                    "province": "Ontario",
+                    "city": "Montreal",
+                    "street": "Rue Drumond 1055",
+                    "bldg": "House Mongo",
+                    "postcode": "H1K2E3",
+                    "tel": "1371234567",
+                    "is_default": "1"
+                },
+                "curtainInfo": {
+                    "roll": [
+                        {
+                            "id": "123",
+                            "order_id": "201805-5-S1",
+                            "curtain_number": "R2018092111",
+                            "curtain_material": "1",
+                            "curtain_material_desc": "材料说明",
+                            "is_old_rod": "1",
+                            "curtain_desc": "说明",
+                            "curtain_count": "2",
+                            "unit": "cm",
+                            "price": "123",
+                            "chord_type": "1081",
+                            "valence": "1",
+                            "returns": "1",
+                            "returns_material": "1121",
+                            "area": [
+                                {
+                                    "id": "2",
+                                    "width": "手填",
+                                    "height": "手填",
+                                    "count": "2",
+                                    "lift_rope": "right",
+                                    "rolling_direction": "1121",
+                                    "motor_side": "left",
+                                    "description": "备注",
+                                    "orig_rate": "346",
+                                    "orig_amount": "692",
+                                    "rebate": "40",
+                                    "amount": "415.2"
+                                }
+                            ],
+                            "motor": [
+                                {
+                                    "curtain_number": "12",
+                                    "motor_type": "1141",
+                                    "motor_model": "1151",
+                                    "motor_location": "1021",
+                                    "motor_num": "2",
+                                    "description": "备注"
+                                }
+                            ],
+                            "valenceArray": [
+                                {
+                                    "id": "38",
+                                    "order_id": "172",
+                                    "curtain_number": "201808-6-D12-R1",
+                                    "line": "1",
+                                    "returns_material": "PVC Valance",
+                                    "len": "54.125",
+                                    "count": "2",
+                                    "description": "我是备注",
+                                    "orig_rate": "116",
+                                    "orig_amount": "232",
+                                    "rebate": "40",
+                                    "amount": "139.2"
+                                }
+                            ],
+                            "returnsArray": [
+                                {
+                                    "id": "38",
+                                    "order_id": "172",
+                                    "curtain_number": "201808-6-D12-R1",
+                                    "line": "1",
+                                    "valence_material": "PVC Valance",
+                                    "len": "54.125",
+                                    "count": "2",
+                                    "description": "我是备注",
+                                    "orig_rate": "116",
+                                    "orig_amount": "232",
+                                    "rebate": "40",
+                                    "amount": "139.2"
+                                }
+                            ]
+                        }
+                    ],
+                    "clothCurtain": [
+                        {
+                            "id": "123",
+                            "order_id": "201805-5-S1",
+                            "curtain_number": "R2018092111",
+                            "curtain_material": "1",
+                            "curtain_material_desc": "材料说明",
+                            "is_old_rod": "1",
+                            "curtain_desc": "说明",
+                            "curtain_count": "2",
+                            "unit": "cm",
+                            "price": "123",
+                            "curtain_type": "1051",
+                            "sheer_material": "手填",
+                            "sheer_material_desc": "手填",
+                            "area": [
+                                {
+                                    "id": "2",
+                                    "width": "手填",
+                                    "height": "手填",
+                                    "divide_into": "1",
+                                    "description": "手填"
+                                }
+                            ],
+                            "sheers_area": [
+                                {
+                                    "id": "2",
+                                    "width": "手填",
+                                    "height": "手填",
+                                    "divide_into": "1",
+                                    "description": "手填"
+                                }
+                            ],
+                            "curtains_area": [
+                                {
+                                    "id": "2",
+                                    "width": "手填",
+                                    "height": "手填",
+                                    "divide_into": "1",
+                                    "description": "手填"
+                                }
+                            ],
+                            "motor": [
+                                {
+                                    "curtain_number": "12",
+                                    "motor_type": "1141",
+                                    "motor_model": "1151",
+                                    "motor_location": "1021",
+                                    "motor_num": "2",
+                                    "description": "备注"
+                                }
+                            ],
+                            "pend": [
+                                {
+                                    "curtain_number": "12",
+                                    "pend_type": "1061",
+                                    "pend_head_type": "1131",
+                                    "pend_num": "2",
+                                    "pend_length": "12",
+                                    "divide_into": "2",
+                                    "description": "我是备注",
+                                    "unit": "cm"
+                                }
+                            ]
+                        }
+                    ],
+                    "blinds": [
+                        {
+                            "id": "123",
+                            "order_id": "201805-5-S1",
+                            "curtain_number": "R2018092111",
+                            "curtain_material": "1",
+                            "curtain_material_desc": "材料说明",
+                            "is_old_rod": "1",
+                            "curtain_desc": "说明",
+                            "curtain_count": "2",
+                            "unit": "cm",
+                            "price": "123",
+                            "valence": "1",
+                            "valence_material": "1121",
+                            "valence_length": "手填",
+                            "returns": "1",
+                            "returns_material": "1121",
+                            "vane_thickness": "2in",
+                            "area": [
+                                {
+                                    "id": "11",
+                                    "width": "手填",
+                                    "height": "手填",
+                                    "tilt_rope": "left",
+                                    "lift_rope": "left"
+                                }
+                            ]
+                        }
+                    ],
+                    "panel": [
+                        {
+                            "id": "123",
+                            "order_id": "201805-5-S1",
+                            "curtain_number": "R2018092111",
+                            "curtain_material": "1",
+                            "curtain_material_desc": "材料说明",
+                            "is_old_rod": "1",
+                            "curtain_desc": "说明",
+                            "curtain_count": "2",
+                            "unit": "cm",
+                            "price": "123",
+                            "width": "手填",
+                            "height": "手填",
+                            "tract_control": "1021",
+                            "tract_stack": "1021",
+                            "panel_num": "手填"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+    const data2 = formatJson1(map, roll);
+    console.log('formatJson1:'+num1+'formatJson:'+num)
+    console.log(data2)
+</script>
+</html>

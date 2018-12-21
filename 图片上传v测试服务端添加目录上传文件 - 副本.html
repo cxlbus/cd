@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="form1">
+    <input type="text" name='name'>
+    <input type="button" value="上传图片" onclick="f.click()" class="btn_mouseout"/><br>
+    <p><input type="file" id="f" name="f" onchange="sc(this);" style="display:none"/></p>
+</form>
+<div id="result"></div>
+
+</body>
+<script src='./lib/js/jquery.min.js'>
+</script>
+<script>
+    function sc() {
+        var data = new FormData($('#form1')[0]);
+        $.ajax({
+            url: "http://127.0.0.1:3110/app/login_after/reset_head_img",
+            type: 'POST',
+            data: data,
+            dataType: 'JSON',
+            cache: false,
+            processData: false,
+            contentType: false,
+            success:function (data) {
+                console.log(data)
+            },
+            error:function (e) {
+                console.log(e)
+            }
+        })
+        return false;
+    }
+
+</script>
+</html>

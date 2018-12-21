@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*递归求解斐波那契数列*/
+    var coun=0
+    // var fib = function (n){
+    //     coun++
+    //     if(n<=2){
+    //         return 1;
+    //     }
+    //     return fib(n-1) + fib(n-2);
+    // }
+    // console.log(fib(20));
+    // console.log(coun);
+    var fib= function(n,a,b) {
+        coun++
+        if (n<=2) {
+            return b;
+        }
+        else {
+            return fib(n-1, b, a+b);
+        }
+    }
+    console.log(fib(7,1,1));
+    console.log(coun);
+    /*缓存递归求解斐波那契数列*/
+    // var cache = [];
+    // function fib(n){
+    //     coun++
+    //     if(cache[n] !== undefined){
+    //         return cache[n];
+    //     }
+    //     if(n <= 2){
+    //         cache[n] = 1;
+    //         return 1;
+    //     }
+    //     cache.push(fib(n - 1) + fib(n - 2));
+    //     return cache[n];
+    // }
+    // console.log(fib(20));//5
+    // console.log(coun);
+
+
+
+    // var fib = function (n){
+    //     var a1=1,a2=1,a3=0;
+    //     if(n<=2){
+    //         return 1;
+    //     }
+    //     for(var i = 0;i < n-1;i++){
+    //         a3 = a1 + a2;
+    //         a1 = a2;
+    //         a2 = a3;
+    //     }
+    //     return a3;
+    // }
+    // console.log(fib(6));
+
+
+    // var tree =
+    //     {
+    //         "name": "Root",
+    //         "childrens": [
+    //             {"name": "node1",
+    //                 "childrens": [
+    //                     {"name": "node2",
+    //                         "childrens": [
+    //                         {"name": "node3"}
+    //                         ]
+    //                     },
+    //                     {"name": "node4"}
+    //                 ]
+    //             },
+    //             {"name": "node5"}
+    //         ]
+    //     }
+    // ;
+    //
+    // var res=function (ad) {
+    //     for (let i=0;i<ad.length;i++){
+    //         dd(ad[i])
+    //     }
+    //     return
+    // }
+    // var dd=function (ad) {
+    //     for(let i in ad){
+    //         console.log(ad[i])
+    //         if(ad[i]&&typeof(ad[i])=='object'&& ad[i].length>0){
+    //             res(ad[i])
+    //         }
+    //     }
+    // }
+    // dd(tree)
+    // var indexData = []; //存储树节点信息， 对应的层放对应的节点信息
+    //
+    // //过滤childrens节点的信息
+    // var filter = function (source) {
+    //     var destince = new Object();
+    //     for (var key in source) {
+    //         if (key == "childrens") continue;
+    //         destince[key] = source[key];
+    //     }
+    //     return destince;
+    // }
+    //
+    //
+    // var writeTreeData = function (node) {
+    //     for (var i = 0; i < node.childrens.length; i++) {
+    //         var childNode = node["childrens"][i];
+    //         childNode.index = node.index + 1;
+    //         if (indexData[childNode.index] == undefined) {
+    //             indexData[childNode.index] = new Array();
+    //         }
+    //         indexData[childNode.index].push(filter(childNode));
+    //         if (childNode.childrens && childNode.childrens.length > 0) {
+    //             writeTreeData(childNode);
+    //         }
+    //     }
+    // }
+    // tree.index = 0;
+    // //存放第1个节点的信息
+    // indexData[tree.index] = [filter(tree)];
+    //
+    // writeTreeData(tree);
+    //
+    // console.info(indexData);
+
+</script>
+</html>

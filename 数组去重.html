@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var array = [{"name":"123",'adsa':'asd'},{"name":"123"},{"name":"456"}];
+    console.log(unique(array));
+    function unique(list) {
+        var arr = [];
+        for (var i = 0; i < list.length; i++) {
+            if (i == 0) arr.push(list[i]);
+            b = false;
+            if (arr.length > 0 && i > 0) {
+                for (var j = 0; j < arr.length; j++) {
+                    if (arr[j].name == list[i].name) {
+                        b = true;
+                        break;
+                    }
+                }
+                if (!b) {
+                    arr.push(list[i]);
+                }
+            }
+        }
+        return arr;
+    }
+</script>
+</html>

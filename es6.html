@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>es6语法测试</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    es6语法
+</h1>
+<button id='test_button'>开始测试</button>
+
+<script type="text/javascript" src="./lib/js/jquery.min.js"></script>
+<!--<script type="text/javascript" src="http://ip.chinaz.com/getip.aspx"></script>-->
+
+<script>
+
+    // class Array {
+    //     constructor() {
+    //         this[0]=`asdfas
+    //         sadfasf`
+    //         this[1]=2
+    //
+    //     }
+    //     greet () {
+    //         return "Hello, " + this.greeting;
+    //     }
+    // }
+    // // 定义类 构造函数
+    // var ab=new Array()
+    // console.log(ab)
+    // console.log(ab.length)
+    // let a = [1, 2, 3]
+    // let b = ({b, ...a}) => {
+    //     console.log(a)
+    // }
+    // b({b: 4, a: a, c: 5, d: 6})
+    function foo() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('foo:' + new Date().toLocaleString())
+                resolve('foo')
+            }, 2000)
+        })
+    }
+
+    function bar() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('bar:' + new Date().toLocaleString())
+                resolve('bar')
+            }, 2000)
+        })
+    }
+
+    // async function main2() {
+    //     let docs = [foo, bar];
+    //     console.log('beginTime:' + new Date().toLocaleString())
+    //     for (let doc of docs) {
+    //         var str = await doc();
+    //         console.log(new Date().toLocaleString())
+    //         console.log(str);
+    //     }
+    //     console.log('endTime:' + new Date().toLocaleString())
+    // }
+
+    //并发执行
+    async function async_main4() {
+        let docs = [foo(), bar()];
+        console.log('beginTime:' + new Date().toLocaleString())
+        for (let doc of docs) {
+            var str = await doc;
+            console.log(new Date().toLocaleString())
+            console.log(str);
+        }
+        console.log('endTime:' + new Date().toLocaleString())
+    }
+    async_main4()
+</script>
+<script>
+</script>
+</body>
+
+</html>
